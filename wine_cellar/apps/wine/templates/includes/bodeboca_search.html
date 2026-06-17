@@ -1,4 +1,5 @@
 {% load i18n static %}
+<link rel="stylesheet" href="{% static 'wine/bodeboca_search.css' %}">
 <div class="bodeboca-search form-container" data-search-url="{% url 'bodeboca-search' %}">
     <details>
         <summary class="bodeboca-search__summary">
@@ -20,22 +21,4 @@
         </div>
     </details>
 </div>
-
-<style>
-.bodeboca-search { margin-bottom: 1rem; }
-.bodeboca-search__summary { cursor: pointer; color: var(--color-primary, #4a90d9); font-weight: 500; list-style: none; }
-.bodeboca-search__summary::-webkit-details-marker { display: none; }
-.bodeboca-search__summary::before { content: "▶ "; font-size: 0.7em; }
-details[open] .bodeboca-search__summary::before { content: "▼ "; }
-.bodeboca-search__body { margin-top: 0.75rem; }
-.bodeboca-search__inputs { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; }
-.bodeboca-search__inputs input { flex: 1; }
-.bodeboca-search__results { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.bodeboca-result { cursor: pointer; border: 2px solid transparent; border-radius: 4px; overflow: hidden; transition: border-color 0.15s; }
-.bodeboca-result:hover { border-color: var(--color-primary, #4a90d9); }
-.bodeboca-result.selected { border-color: #27ae60; }
-.bodeboca-result img { width: 90px; height: 120px; object-fit: contain; background: #f5f5f5; display: block; }
-.bodeboca-result__title { font-size: 0.65rem; padding: 2px 4px; max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.bodeboca-search__msg { color: #888; font-size: 0.85rem; }
-</style>
 <script src="{% static 'wine/bodeboca_search.js' %}" defer></script>
