@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n static %}
 <div class="bodeboca-search form-container" data-search-url="{% url 'bodeboca-search' %}">
     <details>
         <summary class="bodeboca-search__summary">
@@ -38,50 +38,4 @@ details[open] .bodeboca-search__summary::before { content: "▼ "; }
 .bodeboca-result__title { font-size: 0.65rem; padding: 2px 4px; max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .bodeboca-search__msg { color: #888; font-size: 0.85rem; }
 </style>
-
-<script>
-(function () {
-    const container = document.querySelector('.bodeboca-search');
-    if (!container) return;
-    const searchUrl = container.dataset.searchUrl;
-    const btn = document.getElementById('bodeboca-btn');
-    const input = document.getElementById('bodeboca-query');
-    const results = document.getElementById('bodeboca-results');
-    const hiddenField = document.getElementById('id_bodeboca_image_url');
-
-    btn.addEventListener('click', doSearch);
-    input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); doSearch(); } });
-
-    function doSearch() {
-        const q = input.value.trim();
-        if (!q) return;
-        results.innerHTML = '<span class="bodeboca-search__msg">{% translate "Searching..." %}</span>';
-        fetch(`${searchUrl}?q=${encodeURIComponent(q)}`)
-            .then(r => r.json())
-            .then(data => renderResults(data.results || []))
-            .catch(() => { results.innerHTML = '<span class="bodeboca-search__msg">{% translate "Search error. Try again." %}</span>'; });
-    }
-
-    function renderResults(hits) {
-        if (!hits.length) {
-            results.innerHTML = '<span class="bodeboca-search__msg">{% translate "No results found." %}</span>';
-            return;
-        }
-        results.innerHTML = '';
-        hits.forEach(hit => {
-            const div = document.createElement('div');
-            div.className = 'bodeboca-result';
-            div.title = hit.title;
-            div.innerHTML = `<img src="${hit.image_url}" alt="${hit.title}"><div class="bodeboca-result__title">${hit.title}</div>`;
-            div.addEventListener('click', () => selectImage(hit, div));
-            results.appendChild(div);
-        });
-    }
-
-    function selectImage(hit, el) {
-        document.querySelectorAll('.bodeboca-result').forEach(d => d.classList.remove('selected'));
-        el.classList.add('selected');
-        hiddenField.value = hit.image_url;
-    }
-})();
-</script>
+<script src="{% static 'wine/bodeboca_search.js' %}" defer></script>

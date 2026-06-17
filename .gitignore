@@ -6,6 +6,7 @@ venv/
 *.pyc
 node_modules/
 static/
+!wine_cellar/apps/*/static/
 build/
 *.egg-info/
 media/
