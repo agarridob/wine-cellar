@@ -354,11 +354,18 @@ class WineUploadAIView(FormView):
             back_url = f"data:{back_img.content_type or 'image/jpeg'};base64,{back_b64}"
             content.append({"type": "image_url", "image_url": {"url": back_url}})
 
-        response = completion(
-            model=settings.AI_MODEL,
-            messages=[{"role": "user", "content": content}],
-            api_key=settings.AI_API_KEY,
-        )
+        try:
+            response = completion(
+                model=settings.AI_MODEL,
+                messages=[{"role": "user", "content": content}],
+                api_key=settings.AI_API_KEY,
+            )
+        except Exception as e:
+            form.add_error(
+                None,
+                _("AI service error: %(error)s. Please try again.") % {"error": str(e)[:200]},
+            )
+            return self.form_invalid(form)
         ai_text = response.choices[0].message.content.strip()
 
         try:
