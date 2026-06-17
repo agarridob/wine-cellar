@@ -196,6 +196,6 @@ SECURE_CSP = {
     "base-uri": [CSP.NONE],
     "connect-src": [CSP.SELF, "https://tiles.openfreemap.org/"],
     "worker-src": [CSP.SELF, "blob:"],
-    "img-src": [CSP.SELF, "data:"],
+    "img-src": [CSP.SELF, "data:", "https://www.bodeboca.com"],
     "script-src": [CSP.SELF, CSP.WASM_UNSAFE_EVAL],
 }
