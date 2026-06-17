@@ -13,12 +13,13 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.formats import number_format
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import DeleteView, DetailView, FormView, TemplateView
+from django.views.generic import DeleteView, DetailView, FormView, TemplateView, View
 from django_filters.views import FilterView
 from litellm import completion
 
 from wine_cellar.apps.storage.models import StorageItem
 from wine_cellar.apps.user.views import get_user_settings
+from wine_cellar.apps.wine.bodeboca import search_wines as bodeboca_search
 from wine_cellar.apps.wine.fields import OpenChoiceModelFormViewMixin
 from wine_cellar.apps.wine.filters import WineFilter
 from wine_cellar.apps.wine.forms import (
@@ -171,6 +172,12 @@ class WineBaseView(OpenChoiceModelFormViewMixin, FormView):
                 WineImage.objects.get_or_create(
                     image=image, wine=wine, user=user, image_type=image_type
                 )
+
+        bodeboca_url = cleaned_data.get("bodeboca_image_url")
+        if bodeboca_url:
+            wine.external_bottle_image = bodeboca_url
+            wine.save()
+
         return wine
 
 
@@ -391,6 +398,19 @@ class WineUploadAIView(FormView):
         if barcode := self.request.GET.get("barcode"):
             create_url += f"&barcode={barcode}"
         return redirect(create_url)
+
+
+class BodebocaSearchView(View):
+    def get(self, request):
+        query = request.GET.get("q", "").strip()
+        vintage = request.GET.get("vintage", "").strip() or None
+        if not query:
+            return JsonResponse({"results": []})
+        try:
+            results = bodeboca_search(query, vintage=vintage)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+        return JsonResponse({"results": results})
 
 
 @login_not_required

@@ -36,6 +36,7 @@ from wine_cellar.apps.storage.views import (
 )
 from wine_cellar.apps.user.views import UserSettingsView
 from wine_cellar.apps.wine.views import (
+    BodebocaSearchView,
     HomePageView,
     WineChooseActionView,
     WineCreateView,
@@ -75,6 +76,7 @@ urlpatterns = [
     path("wine/scan/<str:barcode>", WineScannedView.as_view(), name="wine-scan"),
     path("wines/map", WineMapView.as_view(), name="wine-map"),
     path("storage/history", StorageItemHistoryView.as_view(), name="stock-history"),
+    path("wine/bodeboca/search/", BodebocaSearchView.as_view(), name="bodeboca-search"),
     path("health/", health_check, name="health_check"),
     path("", HomePageView.as_view(), name="homepage"),
     path("jsi18n/", JavaScriptCatalog.as_view(), name="javascript-catalog"),

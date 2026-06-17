@@ -214,6 +214,7 @@ class Wine(UserContentModel):
     vineyard = models.ManyToManyField(Vineyard)
     source = models.ManyToManyField(Source)
     price = models.DecimalField(max_digits=6, decimal_places=2, null=True)
+    external_bottle_image = models.URLField(blank=True, default="")
 
     def get_absolute_url(self):
         return reverse("wine-detail", kwargs={"pk": self.pk})
@@ -293,11 +294,10 @@ class Wine(UserContentModel):
     def image_thumbnail(self):
         i = self.wineimage_set.filter(image_type=ImageType.FRONT)
         if not i:
-            return static("images/bottle.svg")
+            return self.external_bottle_image or static("images/bottle.svg")
         front = i.first()
         if front.thumbnail:
             return front.thumbnail.url
-        # return normal image as fallback
         return front.image.url
 
     @property

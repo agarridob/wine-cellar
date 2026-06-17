@@ -90,6 +90,7 @@
                             <h2 class="form-subhead">{% translate "Image" %}</h2>
                         </legend>
                         <div class="form__fields">
+                            {% include 'includes/bodeboca_search.html' %}
                             {% include 'forms/form_field.html' with field=form.image_front %}
                             {% include 'forms/form_field.html' with field=form.image_back %}
                             {% include 'forms/form_field.html' with field=form.image_front_label %}

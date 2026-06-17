@@ -1,0 +1,24 @@
+{% load i18n static %}
+<link rel="stylesheet" href="{% static 'wine/bodeboca_search.css' %}">
+<div class="bodeboca-search form-container" data-search-url="{% url 'bodeboca-search' %}">
+    <details>
+        <summary class="bodeboca-search__summary">
+            <span>{% translate "Find bottle photo on Bodeboca" %}</span>
+        </summary>
+        <div class="bodeboca-search__body">
+            <div class="bodeboca-search__inputs pure-form">
+                <input type="text"
+                       id="bodeboca-query"
+                       class="pure-input-2-3"
+                       placeholder="{% translate "Wine name..." %}"
+                       value="{{ form.name.value|default:'' }}">
+                <button type="button"
+                        id="bodeboca-btn"
+                        class="pure-button button__primary pure-input-1-3">{% translate "Search" %}</button>
+            </div>
+            <div id="bodeboca-results" class="bodeboca-search__results"></div>
+            {{ form.bodeboca_image_url }}
+        </div>
+    </details>
+</div>
+<script src="{% static 'wine/bodeboca_search.js' %}" defer></script>
