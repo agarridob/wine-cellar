@@ -30,7 +30,9 @@
                         {% if field.name == "image_front" %}
                             {% include 'includes/bodeboca_search.html' %}
                         {% endif %}
-                        {% include 'forms/form_field.html' %}
+                        {% if field.name != "bodeboca_image_url" %}
+                            {% include 'forms/form_field.html' %}
+                        {% endif %}
                         {% if field.name == "barcode" %}
                             <div id="scanner"
                                  data-zxing_wasm_url="{% static 'zxing_reader.wasm' %}"
