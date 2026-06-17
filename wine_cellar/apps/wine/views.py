@@ -1,9 +1,12 @@
 import base64
 import json
+import os
 from decimal import Decimal
 
+import requests as http_requests
 from django.conf import settings
 from django.contrib.auth.decorators import login_not_required
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.db import connections
 from django.db.models import Avg, F, Q, Sum
 from django.db.models.functions import Coalesce
@@ -13,12 +16,13 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.formats import number_format
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import DeleteView, DetailView, FormView, TemplateView
+from django.views.generic import DeleteView, DetailView, FormView, TemplateView, View
 from django_filters.views import FilterView
 from litellm import completion
 
 from wine_cellar.apps.storage.models import StorageItem
 from wine_cellar.apps.user.views import get_user_settings
+from wine_cellar.apps.wine.bodeboca import search_wines as bodeboca_search
 from wine_cellar.apps.wine.fields import OpenChoiceModelFormViewMixin
 from wine_cellar.apps.wine.filters import WineFilter
 from wine_cellar.apps.wine.forms import (
@@ -28,6 +32,7 @@ from wine_cellar.apps.wine.forms import (
 )
 from wine_cellar.apps.wine.models import (
     Category,
+    ImageType,
     Wine,
     WineImage,
     WineType,
@@ -171,7 +176,28 @@ class WineBaseView(OpenChoiceModelFormViewMixin, FormView):
                 WineImage.objects.get_or_create(
                     image=image, wine=wine, user=user, image_type=image_type
                 )
+
+        bodeboca_url = cleaned_data.get("bodeboca_image_url")
+        if bodeboca_url:
+            self._save_bodeboca_image(wine, user, bodeboca_url)
+
         return wine
+
+    def _save_bodeboca_image(self, wine, user, url):
+        try:
+            resp = http_requests.get(url, timeout=10)
+            resp.raise_for_status()
+        except Exception:
+            return
+        filename = os.path.basename(url.split("?")[0]) or "bodeboca.jpg"
+        content_type = resp.headers.get("content-type", "image/jpeg").split(";")[0]
+        img_file = SimpleUploadedFile(filename, resp.content, content_type=content_type)
+        existing = WineImage.objects.filter(wine=wine, user=user, image_type=ImageType.FRONT)
+        for old in existing:
+            old.image.delete()
+            old.thumbnail.delete()
+        existing.delete()
+        WineImage.objects.create(image=img_file, wine=wine, user=user, image_type=ImageType.FRONT)
 
 
 class WineCreateView(WineBaseView):
@@ -391,6 +417,19 @@ class WineUploadAIView(FormView):
         if barcode := self.request.GET.get("barcode"):
             create_url += f"&barcode={barcode}"
         return redirect(create_url)
+
+
+class BodebocaSearchView(View):
+    def get(self, request):
+        query = request.GET.get("q", "").strip()
+        vintage = request.GET.get("vintage", "").strip() or None
+        if not query:
+            return JsonResponse({"results": []})
+        try:
+            results = bodeboca_search(query, vintage=vintage)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+        return JsonResponse({"results": results})
 
 
 @login_not_required

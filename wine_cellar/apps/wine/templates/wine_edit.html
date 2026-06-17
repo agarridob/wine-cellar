@@ -27,6 +27,9 @@
                 {% csrf_token %}
                 <div class="form__fields">
                     {% for field in form %}
+                        {% if field.name == "image_front" %}
+                            {% include 'includes/bodeboca_search.html' %}
+                        {% endif %}
                         {% include 'forms/form_field.html' %}
                         {% if field.name == "barcode" %}
                             <div id="scanner"

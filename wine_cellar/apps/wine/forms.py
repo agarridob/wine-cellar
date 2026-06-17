@@ -410,6 +410,8 @@ class WineForm(TomSelectMixin, WineFormPostCleanMixin, forms.Form):
         required=False,
         help_text=_("Upload a photo of the back of the bottle label."),
     )
+    bodeboca_image_url = forms.URLField(required=False, widget=forms.HiddenInput(), label="")
+
     form_step = forms.IntegerField(
         widget=forms.HiddenInput(),
         label="",
