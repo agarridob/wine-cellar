@@ -1,12 +1,9 @@
 import base64
 import json
-import os
 from decimal import Decimal
 
-import requests as http_requests
 from django.conf import settings
 from django.contrib.auth.decorators import login_not_required
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.db import connections
 from django.db.models import Avg, F, Q, Sum
 from django.db.models.functions import Coalesce
@@ -32,7 +29,6 @@ from wine_cellar.apps.wine.forms import (
 )
 from wine_cellar.apps.wine.models import (
     Category,
-    ImageType,
     Wine,
     WineImage,
     WineType,
@@ -179,25 +175,10 @@ class WineBaseView(OpenChoiceModelFormViewMixin, FormView):
 
         bodeboca_url = cleaned_data.get("bodeboca_image_url")
         if bodeboca_url:
-            self._save_bodeboca_image(wine, user, bodeboca_url)
+            wine.external_bottle_image = bodeboca_url
+            wine.save()
 
         return wine
-
-    def _save_bodeboca_image(self, wine, user, url):
-        try:
-            resp = http_requests.get(url, timeout=10)
-            resp.raise_for_status()
-        except Exception:
-            return
-        filename = os.path.basename(url.split("?")[0]) or "bodeboca.jpg"
-        content_type = resp.headers.get("content-type", "image/jpeg").split(";")[0]
-        img_file = SimpleUploadedFile(filename, resp.content, content_type=content_type)
-        existing = WineImage.objects.filter(wine=wine, user=user, image_type=ImageType.FRONT)
-        for old in existing:
-            old.image.delete()
-            old.thumbnail.delete()
-        existing.delete()
-        WineImage.objects.create(image=img_file, wine=wine, user=user, image_type=ImageType.FRONT)
 
 
 class WineCreateView(WineBaseView):
