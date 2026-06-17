@@ -341,18 +341,19 @@ class WineUploadAIView(FormView):
         front_img = form.cleaned_data.get("front")
         back_img = form.cleaned_data.get("back")
 
+        _supported = {"image/jpeg", "image/png", "image/gif", "image/webp"}
+
+        def image_data_url(img):
+            mime = img.content_type if img.content_type in _supported else "image/jpeg"
+            b64 = base64.b64encode(img.read()).decode()
+            return f"data:{mime};base64,{b64}"
+
         content = [{"type": "text", "text": self.MODEL_INSTRUCTIONS}]
         if front_img:
-            front_b64 = base64.b64encode(front_img.read()).decode()
-            front_url = (
-                f"data:{front_img.content_type or 'image/jpeg'};base64,{front_b64}"
-            )
-            content.append({"type": "image_url", "image_url": {"url": front_url}})
+            content.append({"type": "image_url", "image_url": {"url": image_data_url(front_img)}})
 
         if back_img:
-            back_b64 = base64.b64encode(back_img.read()).decode()
-            back_url = f"data:{back_img.content_type or 'image/jpeg'};base64,{back_b64}"
-            content.append({"type": "image_url", "image_url": {"url": back_url}})
+            content.append({"type": "image_url", "image_url": {"url": image_data_url(back_img)}})
 
         try:
             response = completion(
