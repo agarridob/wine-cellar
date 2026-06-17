@@ -6,6 +6,7 @@ import pycountry
 from wine_cellar.apps.wine.models import (
     Appellation,
     Category,
+    FoodPairing,
     Grape,
     Region,
     Size,
@@ -22,6 +23,7 @@ class WineAiSerializer:
         "vineyard": {"model": Vineyard, "multi": True},
         "region": {"model": Region, "multi": False},
         "appellation": {"model": Appellation, "multi": False},
+        "food_pairings": {"model": FoodPairing, "multi": True},
     }
 
     def serialize_relation(self, value, model, multi=False):
@@ -111,6 +113,10 @@ class WineAiSerializer:
             initial[field] = self.serialize_relation(
                 value=value, model=cfg["model"], multi=cfg["multi"]
             )
+
+        comment = ai_json.get("comment")
+        if comment:
+            initial["comment"] = str(comment)[:250]
 
         size_val = ai_json.get("size")
         if size_val:

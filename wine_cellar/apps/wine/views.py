@@ -303,19 +303,29 @@ class WineUploadAIView(FormView):
     sweetness_categories = ", ".join([choice.label.lower() for choice in Category])
 
     MODEL_INSTRUCTIONS = f"""
-    Return JSON with fields:
+    You are analyzing wine label images to extract structured data.
+    The FIRST image is the FRONT label (mandatory). The SECOND image, if provided, is the BACK label.
+
+    Use the FRONT label for: wine name, producer, vintage, type, region, appellation, grapes, alcohol, bottle size, country.
+    Use the BACK label for: tasting notes or description (→ comment), food pairings, and any additional details.
+
+    Return ONLY a JSON object with these fields:
     name: wine name
-    country: ISO2 code
-    type: {wine_types}
-    size: float, bottle size in liters, e.g. 0.75, if no value guess
-    grapes: list of grapes
-    vintage: year
-    abs: float, alcohol %
-    sweetness: {sweetness_categories}
-    vineyard: list of vineyard names
-    region: region
-    appellation: appellation
-    location: lat,long; if unknown use region or omit
+    country: ISO2 country code
+    type: one of {wine_types}
+    size: bottle size in liters as float (e.g. 0.75), guess if not shown
+    grapes: list of grape variety names
+    vintage: harvest year as integer
+    abs: alcohol percentage as float
+    sweetness: one of {sweetness_categories}
+    vineyard: list of producer or winery names
+    region: wine region
+    appellation: appellation or DOC/AOC/AOP designation
+    location: "lat,long" if determinable, otherwise omit
+    comment: tasting notes or description from back label, max 200 characters (omit if not available)
+    food_pairings: list of food pairing suggestions from back label, e.g. ["red meat", "pasta", "aged cheese"] (omit if not available)
+
+    Return ONLY the JSON object, no markdown formatting or code blocks.
     """
 
     def get_context_data(self, **kwargs):

@@ -442,21 +442,11 @@ class WineUploadAIForm(forms.Form):
 
     front = forms.ImageField(
         widget=NoFilenameClearableFileInput(attrs={"accept": "image/*"}),
-        required=False,
+        required=True,
         help_text=_("Upload an image of the front label."),
     )
     back = ImageField(
         widget=NoFilenameClearableFileInput(attrs={"accept": "image/*"}),
         required=False,
-        help_text=_("Upload an image of the back label."),
+        help_text=_("Upload an image of the back label (optional, adds tasting notes and food pairings)."),
     )
-
-    def clean(self):
-        cleaned_data = super().clean()
-        front = cleaned_data.get("front")
-        back = cleaned_data.get("back")
-        if not front and not back:
-            raise forms.ValidationError(
-                _("At least one image (front or back) must be uploaded.")
-            )
-        return cleaned_data
