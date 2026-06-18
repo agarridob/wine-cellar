@@ -1,58 +1,57 @@
 {% extends 'base.html' %}
 {% load static i18n %}
 {% block header %}
-    <h1 class="header__title">{% translate "My Wine Cellar" %}</h1>
+    <h1 class="text-3xl font-light text-cellar-muted text-center mt-12 mb-9">{% translate "My Wine Cellar" %}</h1>
 {% endblock header %}
 {% block content %}
-    <div class="pure-g j-center">
-        <div class="pure-u-2-3">
-            <ul class="stats__card-container">
-                <li class="stats__card">
-                    <a class="stats__link" href="{% url 'wine-list' %}?stock=1">
-                        <p class="stats__number">{{ wines_in_stock }}</p>
-                        <h2 class="stats__label">
-                            {% blocktranslate count counter=wines_in_stock %}Wine in Stock{% plural %}Wines in Stock{% endblocktranslate %}
-                        </h2>
-                    </a>
-                </li>
-                <li class="stats__card">
-                    <a class="stats__link"
-                       href="{% url 'wine-list' %}?name=&wine_type=&category=&vintage=&order=-effective_price">
-                        <p class="stats__number">{{ total_value }}</p>
-                        <h2 class="stats__label">{% translate "Total Value in Stock" %}</h2>
-                    </a>
-                </li>
-                <li class="stats__card">
-                    <a class="stats__link" href="{% url 'wine-list' %}">
-                        <p class="stats__number">{{ wines }}</p>
-                        <h2 class="stats__label">
-                            {% blocktranslate count counter=wines %}Recorded Wine{% plural %}Recorded Wines{% endblocktranslate %}
-                        </h2>
-                    </a>
-                </li>
-                <li class="stats__card">
-                    <a class="stats__link" href="{% url 'wine-list' %}">
-                        <p class="stats__number">{{ countries }}</p>
-                        <h2 class="stats__label">
-                            {% blocktranslate context "stats" count counter=countries %}Country{% plural %}Countries{% endblocktranslate %}
-                        </h2>
-                    </a>
-                </li>
-                <li class="stats__card">
-                    <a class="stats__link"
-                       href="{% url 'wine-list' %}?name=&wine_type=&category=&vintage=&order=vintage">
-                        <p class="stats__number">{{ oldest }}</p>
-                        <h2 class="stats__label">{% translate "Oldest Wine" %}</h2>
-                    </a>
-                </li>
-                <li class="stats__card">
-                    <a class="stats__link"
-                       href="{% url 'wine-list' %}?name=&wine_type=&category=&vintage=&order=-vintage">
-                        <p class="stats__number">{{ youngest }}</p>
-                        <h2 class="stats__label">{% translate "Youngest Wine" %}</h2>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <ul class="flex flex-wrap justify-center items-center gap-4 list-none p-0 max-w-2xl mx-auto">
+        <li class="w-32 max-w-[30vw] aspect-square">
+            <a class="flex flex-col items-center justify-center h-full bg-white rounded-xl shadow-card no-underline transition hover:shadow-lg hover:bg-[#fdfdf9]"
+               href="{% url 'wine-list' %}?stock=1">
+                <p class="text-3xl text-cellar-text m-0 leading-none">{{ wines_in_stock }}</p>
+                <h2 class="text-sm text-cellar-muted font-light px-4 m-0 mt-1 text-center leading-tight">
+                    {% blocktranslate count counter=wines_in_stock %}Wine in Stock{% plural %}Wines in Stock{% endblocktranslate %}
+                </h2>
+            </a>
+        </li>
+        <li class="w-32 max-w-[30vw] aspect-square">
+            <a class="flex flex-col items-center justify-center h-full bg-white rounded-xl shadow-card no-underline transition hover:shadow-lg hover:bg-[#fdfdf9]"
+               href="{% url 'wine-list' %}?name=&wine_type=&category=&vintage=&order=-effective_price">
+                <p class="text-3xl text-cellar-text m-0 leading-none">{{ total_value }}</p>
+                <h2 class="text-sm text-cellar-muted font-light px-4 m-0 mt-1 text-center leading-tight">{% translate "Total Value in Stock" %}</h2>
+            </a>
+        </li>
+        <li class="w-32 max-w-[30vw] aspect-square">
+            <a class="flex flex-col items-center justify-center h-full bg-white rounded-xl shadow-card no-underline transition hover:shadow-lg hover:bg-[#fdfdf9]"
+               href="{% url 'wine-list' %}">
+                <p class="text-3xl text-cellar-text m-0 leading-none">{{ wines }}</p>
+                <h2 class="text-sm text-cellar-muted font-light px-4 m-0 mt-1 text-center leading-tight">
+                    {% blocktranslate count counter=wines %}Recorded Wine{% plural %}Recorded Wines{% endblocktranslate %}
+                </h2>
+            </a>
+        </li>
+        <li class="w-32 max-w-[30vw] aspect-square">
+            <a class="flex flex-col items-center justify-center h-full bg-white rounded-xl shadow-card no-underline transition hover:shadow-lg hover:bg-[#fdfdf9]"
+               href="{% url 'wine-list' %}">
+                <p class="text-3xl text-cellar-text m-0 leading-none">{{ countries }}</p>
+                <h2 class="text-sm text-cellar-muted font-light px-4 m-0 mt-1 text-center leading-tight">
+                    {% blocktranslate context "stats" count counter=countries %}Country{% plural %}Countries{% endblocktranslate %}
+                </h2>
+            </a>
+        </li>
+        <li class="w-32 max-w-[30vw] aspect-square">
+            <a class="flex flex-col items-center justify-center h-full bg-white rounded-xl shadow-card no-underline transition hover:shadow-lg hover:bg-[#fdfdf9]"
+               href="{% url 'wine-list' %}?name=&wine_type=&category=&vintage=&order=vintage">
+                <p class="text-3xl text-cellar-text m-0 leading-none">{{ oldest }}</p>
+                <h2 class="text-sm text-cellar-muted font-light px-4 m-0 mt-1 text-center leading-tight">{% translate "Oldest Wine" %}</h2>
+            </a>
+        </li>
+        <li class="w-32 max-w-[30vw] aspect-square">
+            <a class="flex flex-col items-center justify-center h-full bg-white rounded-xl shadow-card no-underline transition hover:shadow-lg hover:bg-[#fdfdf9]"
+               href="{% url 'wine-list' %}?name=&wine_type=&category=&vintage=&order=-vintage">
+                <p class="text-3xl text-cellar-text m-0 leading-none">{{ youngest }}</p>
+                <h2 class="text-sm text-cellar-muted font-light px-4 m-0 mt-1 text-center leading-tight">{% translate "Youngest Wine" %}</h2>
+            </a>
+        </li>
+    </ul>
 {% endblock content %}
