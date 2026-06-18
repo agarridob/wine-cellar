@@ -946,3 +946,7 @@ msgstr ""
 #: wine_cellar/templates/includes/settings_sidebar.html:15
 msgid "Social Accounts"
 msgstr ""
+
+#: wine_cellar/conf/settings.py:149
+msgid "Spanish"
+msgstr "Espagnol"

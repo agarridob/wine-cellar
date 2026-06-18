@@ -869,3 +869,7 @@ msgstr "Change Password"
 #: wine_cellar/templates/includes/settings_sidebar.html:15
 msgid "Social Accounts"
 msgstr "Social Accounts"
+
+#: wine_cellar/conf/settings.py:149
+msgid "Spanish"
+msgstr "Spanish"

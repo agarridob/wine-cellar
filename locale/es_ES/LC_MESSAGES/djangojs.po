@@ -1,0 +1,61 @@
+# Spanish (Spain) translation for Wine Cellar (JavaScript catalog).
+# This file is distributed under the same license as the wine-cellar package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: wine-cellar\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-21 09:11+0200\n"
+"PO-Revision-Date: 2026-06-18 12:00+0200\n"
+"Last-Translator: \n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: wine_cellar/assets/js/image_preview.ts:50
+msgid "Clear Image"
+msgstr "Borrar imagen"
+
+#: wine_cellar/assets/js/image_preview.ts:51
+msgid "Restore image"
+msgstr "Restaurar imagen"
+
+#: wine_cellar/react/maps/ItemPopup.tsx:5
+msgctxt "Singular"
+msgid "Country"
+msgstr "País"
+
+#: wine_cellar/react/maps/ItemPopup.tsx:6
+msgid "Picture of a wine bottle."
+msgstr "Foto de una botella de vino."
+
+#: wine_cellar/react/maps/ItemPopup.tsx:7
+msgid "Vintage"
+msgstr "Añada"
+
+#: wine_cellar/react/react_bar_code.tsx:8
+msgid "Advanced"
+msgstr "Avanzado"
+
+#: wine_cellar/react/react_bar_code.tsx:10
+msgid ""
+"Choose the type of barcode you want to scan, sometimes this can help if "
+"scanning doesn't work."
+msgstr ""
+"Elige el tipo de código de barras que quieres escanear; a veces esto ayuda "
+"si el escaneo no funciona."
+
+#: wine_cellar/react/react_bar_code.tsx:12
+msgid "Scan Barcode"
+msgstr "Escanear código de barras"
+
+#: wine_cellar/react/react_bar_code.tsx:13
+msgid "Close Scanner"
+msgstr "Cerrar escáner"
+
+#: wine_cellar/react/react_bar_code.tsx:71
+msgid "All"
+msgstr "Todos"
