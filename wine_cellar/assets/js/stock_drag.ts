@@ -1,6 +1,6 @@
 function initStockDrag() {
   const table = document.querySelector(
-    '.card__table'
+    '[data-storage]'
   ) as HTMLTableElement | null
   if (!table) {
     return
@@ -21,7 +21,7 @@ function initStockDrag() {
     // Accept draggable rows (items) or empty slot rows
     if (
       row.hasAttribute('data-item-id') ||
-      row.classList.contains('card__table-empty')
+      row.classList.contains('table-row-empty')
     ) {
       return row
     }
@@ -89,7 +89,7 @@ function initStockDrag() {
     const formData = new FormData()
     formData.append('item1', item1)
 
-    if (targetRow.classList.contains('card__table-empty')) {
+    if (targetRow.classList.contains('table-row-empty')) {
       // Dropping on an empty slot
       const slotStorage = table.dataset.storage
       const slotRow = targetRow.dataset.row

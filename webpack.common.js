@@ -20,6 +20,7 @@ module.exports = {
         './wine_cellar/assets/css/page-layout.css',
         './wine_cellar/assets/css/homepage.css',
         './wine_cellar/assets/css/button.css',
+        './wine_cellar/assets/css/tailwind.css',
       ],
     },
     tom_select: {
@@ -97,7 +98,7 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                plugins: [require('autoprefixer')],
+                plugins: [require('tailwindcss'), require('autoprefixer')],
               },
             },
           },
