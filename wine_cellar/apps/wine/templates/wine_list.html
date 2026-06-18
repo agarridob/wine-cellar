@@ -55,6 +55,9 @@
             </form>
         </div>
         <div class="w-full sm:flex-1">
+            <div class="flex justify-end mb-4">
+                <a href="{% url 'wine-add-choose' %}" class="btn btn-primary"><i class="fa-regular fa-plus"></i> <span>{% translate "Add Wine" %}</span></a>
+            </div>
             <ul class="grid grid-cols-1 lg:grid-cols-2 gap-4 list-none p-0 m-0">
                 {% for wine in wines %}
                     {% include 'wine_card.html' with wine=wine %}

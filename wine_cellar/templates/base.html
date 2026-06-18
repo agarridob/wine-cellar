@@ -39,8 +39,6 @@
                             <ul class="list-none m-0 py-2">
                                 {% if user.is_authenticated %}
                                     <li><a href="{% url 'wine-list' %}" class="block px-5 py-3 text-white/90 hover:text-white hover:bg-white/10 no-underline text-sm">{% translate "Wines" %}</a></li>
-                                    <li><a href="{% url 'wine-add-choose' %}" class="block px-5 py-3 text-white/90 hover:text-white hover:bg-white/10 no-underline text-sm">{% translate "Add Wine" %}</a></li>
-                                    <li><a href="{% url 'wine-scan' %}" class="block px-5 py-3 text-white/90 hover:text-white hover:bg-white/10 no-underline text-sm">{% translate "Scan Wine" %}</a></li>
                                     <li><a href="{% url 'wine-map' %}" class="block px-5 py-3 text-white/90 hover:text-white hover:bg-white/10 no-underline text-sm">{% translate "Map" %}</a></li>
                                     <li><a href="{% url 'storage-list' %}" class="block px-5 py-3 text-white/90 hover:text-white hover:bg-white/10 no-underline text-sm">{% translate "Storage" %}</a></li>
                                     <li><a href="{% url 'user-settings' %}" class="block px-5 py-3 text-white/90 hover:text-white hover:bg-white/10 no-underline text-sm">{% translate "Settings" %}</a></li>
@@ -64,8 +62,6 @@
                             <ul class="flex items-center gap-1 list-none m-0 p-0">
                                 {% if user.is_authenticated %}
                                     <li><a href="{% url 'wine-list' %}" class="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded text-sm no-underline transition-colors">{% translate "Wines" %}</a></li>
-                                    <li><a href="{% url 'wine-add-choose' %}" class="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded text-sm no-underline transition-colors">{% translate "Add Wine" %}</a></li>
-                                    <li><a href="{% url 'wine-scan' %}" class="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded text-sm no-underline transition-colors">{% translate "Scan Wine" %}</a></li>
                                     <li><a href="{% url 'wine-map' %}" class="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded text-sm no-underline transition-colors">{% translate "Map" %}</a></li>
                                     <li><a href="{% url 'storage-list' %}" class="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded text-sm no-underline transition-colors">{% translate "Storage" %}</a></li>
                                     <li><a href="{% url 'user-settings' %}" class="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded text-sm no-underline transition-colors">{% translate "Settings" %}</a></li>
