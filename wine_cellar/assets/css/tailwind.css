@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    /* Reusable button styles for the Tailwind-migrated screens.
+       Kept here (not inline) because buttons recur across many templates. */
+    .btn {
+        @apply inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-md text-sm font-normal no-underline cursor-pointer border-0 transition-colors;
+    }
+    .btn-primary {
+        @apply bg-cellar-green text-white hover:bg-cellar-green-dark active:bg-cellar-green-darkest focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[rgba(21,156,228,0.35)];
+    }
+    .btn-secondary {
+        @apply bg-cellar-purple text-white hover:bg-cellar-purple-dark focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[rgba(21,156,228,0.35)];
+    }
+    .btn-neutral {
+        @apply bg-cellar-green-tint text-cellar-text hover:bg-[#dadfcf] focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[rgba(21,156,228,0.35)];
+    }
+}
