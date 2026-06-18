@@ -65,6 +65,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "wine_cellar.apps.user.middleware.UserLanguageMiddleware",
     "django.contrib.auth.middleware.LoginRequiredMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -146,6 +147,7 @@ LANGUAGES = [
     ("de-DE", _("German")),
     ("fr-FR", _("French")),
     ("en-gb", _("British English")),
+    ("es-ES", _("Spanish")),
 ]
 
 # LOCALE_PATHS = [BASE_DIR / "locale"]
