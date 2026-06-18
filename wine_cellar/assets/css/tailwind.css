@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Sane typography defaults for content not carrying explicit utility
+   classes (chiefly the allauth auth pages, which render headings and
+   paragraphs through their own element system). Utility classes set on
+   an element still win over these base rules. */
+@layer base {
+    h1 {
+        @apply text-3xl font-light leading-tight text-cellar-text mb-3;
+    }
+    h2 {
+        @apply text-2xl font-light leading-tight text-cellar-text mb-2;
+    }
+    h3 {
+        @apply text-lg font-light leading-tight text-cellar-text mb-2;
+    }
+    p {
+        @apply mb-3;
+    }
+    a {
+        @apply text-cellar-green underline;
+    }
+}
+
 @layer components {
     /* Reusable button styles for the Tailwind-migrated screens.
        Kept here (not inline) because buttons recur across many templates. */
@@ -39,6 +61,22 @@
     }
     .table-actions a:hover {
         @apply bg-cellar-green-tint text-cellar-text;
+    }
+    /* Drag-and-drop for the storage detail table (stock_drag.ts). */
+    .tw-table tr[draggable="true"] {
+        @apply transition-opacity;
+    }
+    .tw-table tr.dragging {
+        @apply opacity-40;
+    }
+    .tw-table tr.drag-over {
+        @apply outline-dashed outline-2 -outline-offset-2 outline-cellar-green;
+    }
+    .table-row-empty td {
+        @apply text-[#bbb] italic;
+    }
+    .table-row-empty.drag-over {
+        @apply bg-cellar-green-tint outline-dashed outline-2 -outline-offset-2 outline-cellar-green;
     }
 
     /* Form controls for Tailwind-migrated forms. Inputs are rendered by
