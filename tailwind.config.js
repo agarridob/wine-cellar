@@ -6,10 +6,6 @@ module.exports = {
     './wine_cellar/assets/**/*.{js,ts}',
     './wine_cellar/react/**/*.{ts,tsx}',
   ],
-  corePlugins: {
-    // Disable preflight while PureCSS is still in the bundle
-    preflight: false,
-  },
   theme: {
     extend: {
       colors: {
