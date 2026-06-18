@@ -1,7 +1,7 @@
 {% load widget_tweaks %}
 {% if field.field.widget.input_type == "select" and not field.field.choices %}
 {% else %}
-    <div class="pure-control-group">
+    <div class="mb-3">
         <label for="{{ field.id_for_label }}">{{ field.label }}</label>
         {{ field }}
     </div>

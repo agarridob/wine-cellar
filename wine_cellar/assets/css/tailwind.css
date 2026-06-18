@@ -17,4 +17,42 @@
     .btn-neutral {
         @apply bg-cellar-green-tint text-cellar-text hover:bg-[#dadfcf] focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[rgba(21,156,228,0.35)];
     }
+
+    /* Form controls for Tailwind-migrated forms. Inputs are rendered by
+       Django ({{ field }}) so they are styled via descendant selectors
+       under .tw-form rather than per-widget classes. */
+    .tw-form fieldset {
+        @apply border-0 p-0 m-0 min-w-0;
+    }
+    .tw-form label {
+        @apply block text-sm text-cellar-text mb-1;
+    }
+    .tw-form input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+    .tw-form select,
+    .tw-form textarea {
+        @apply w-full min-h-[36px] px-2 py-2 border border-cellar-border rounded-md text-sm bg-white box-border shadow-none;
+        @apply focus:outline-none focus:border-cellar-green focus:ring-2 focus:ring-[rgba(64,128,72,0.2)];
+    }
+    .tw-form input[type="file"] {
+        @apply w-full min-h-[36px] p-1.5 border border-cellar-border rounded-md text-sm box-border bg-white;
+    }
+    .tw-form input[type="file"]::file-selector-button {
+        @apply px-3 py-1 mr-2 border-0 rounded bg-cellar-green-tint text-cellar-text text-xs cursor-pointer transition-colors;
+    }
+    .tw-form input[type="file"]::file-selector-button:hover {
+        @apply bg-cellar-green text-white;
+    }
+    .tw-form input[aria-invalid="true"] {
+        @apply border-cellar-danger;
+    }
+    /* tom-select widgets keep their base CSS; align the control to match. */
+    .tw-form .ts-wrapper {
+        @apply w-full mt-0;
+    }
+    .tw-form .ts-control {
+        @apply min-h-[36px] border border-cellar-border rounded-md text-sm shadow-none;
+    }
+    .tw-form .ts-wrapper.focus .ts-control {
+        @apply border-cellar-green ring-2 ring-[rgba(64,128,72,0.2)];
+    }
 }
