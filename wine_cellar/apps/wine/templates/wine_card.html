@@ -1,40 +1,41 @@
 {% load static i18n %}
-<li class="wine-card">
-    <div class="wine-card__image-wrapper">
+<li class="group relative flex flex-wrap box-border bg-white rounded-xl shadow-card overflow-hidden p-5 pb-3 w-full transition-shadow hover:shadow-lg focus-within:shadow-lg">
+    <div class="w-[120px] h-[160px] shrink-0">
         <img src="{{ wine.image_thumbnail }}"
-             class="wine-card__img"
+             class="max-h-[160px] max-w-[120px] w-auto h-auto mx-auto block object-cover rounded-lg"
              height="160"
              width="120"
              loading="lazy"
              alt="{% blocktranslate with type=wine.get_type %}Image of a glass of {{ type }} wine{% endblocktranslate %}">
     </div>
-    <div class="wine-card__detail-container">
-        <h2 class="wine-card__title">
-            <a class="wine-card__link" href="{% url 'wine-detail' wine.pk %}">{{ wine.name }}</a>
+    <div class="flex-1 min-w-[120px] ml-3.5 max-[353px]:ml-0 max-[353px]:mt-4">
+        <h2 class="mt-0 mb-2 text-xl font-normal leading-tight [overflow-wrap:anywhere]">
+            <a class="no-underline text-inherit after:content-[''] after:absolute after:inset-0 focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[1.5px] focus-visible:outline-[rgba(0,125,255,0.6)]"
+               href="{% url 'wine-detail' wine.pk %}">{{ wine.name }}</a>
         </h2>
         {% if wine.get_grapes %}
-            <p><span class="text--gray">{% translate "Grapes" %}:</span> {{ wine.get_grapes | truncatechars:31 | title }}</p>
+            <p class="m-0"><span class="text-cellar-muted">{% translate "Grapes" %}:</span> {{ wine.get_grapes | truncatechars:31 | title }}</p>
         {% endif %}
         {% if wine.vintage %}
-            <p><span class="text--gray">{% translate "Vintage" %}:</span> {{ wine.vintage }}</p>
+            <p class="m-0"><span class="text-cellar-muted">{% translate "Vintage" %}:</span> {{ wine.vintage }}</p>
         {% endif %}
         {% if wine.drink_by %}
-            <p>
-                <span class="text--gray">{% translate "Drink By" %}:</span> {{ wine.drink_by }}
+            <p class="m-0">
+                <span class="text-cellar-muted">{% translate "Drink By" %}:</span> {{ wine.drink_by }}
                 {% if wine.drink_by <= wine.drink_by_warning_date %}
-                    <i class="fa-solid fa-circle-exclamation wine-card__drink-warning"
+                    <i class="fa-solid fa-circle-exclamation text-cellar-warning text-xs ml-1"
                        aria-label="{% translate "Drink soon" %}"></i>
                 {% endif %}
             </p>
         {% endif %}
         {% if wine.rating %}
-            <p class="wine-card__rating" aria-label="{% blocktranslate with rating=wine.rating %}Rating: {{ rating }} out of 10{% endblocktranslate %}">
-                <i class="fa-solid fa-star" aria-hidden="true"></i>
-                <span>{{ wine.rating }}/10</span>
+            <p class="flex items-center gap-1 m-0" aria-label="{% blocktranslate with rating=wine.rating %}Rating: {{ rating }} out of 10{% endblocktranslate %}">
+                <i class="fa-solid fa-star text-cellar-gold text-xs" aria-hidden="true"></i>
+                <span class="text-cellar-muted text-xs">{{ wine.rating }}/10</span>
             </p>
         {% endif %}
     </div>
-    <div class="wine-card__stock">
-        <p>{% translate "Stock:" %} {{ wine.total_stock }}</p>
+    <div class="min-w-full content-end text-end text-xs text-cellar-muted mt-2">
+        <p class="m-0">{% translate "Stock:" %} {{ wine.total_stock }}</p>
     </div>
 </li>

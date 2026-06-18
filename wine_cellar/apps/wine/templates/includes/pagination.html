@@ -1,32 +1,35 @@
 {% load i18n %}
-<ul class="pagination">
+<ul class="flex justify-center items-center gap-1 mt-8 list-none p-0 text-base">
     {% if page_obj.has_previous %}
         <li>
-            <a href="{% querystring page=page_obj.previous_page_number %}">«</a>
+            <a href="{% querystring page=page_obj.previous_page_number %}"
+               class="inline-block px-2 py-1 text-cellar-purple no-underline hover:text-cellar-purple-dark">«</a>
         </li>
     {% else %}
-        <li class="disabled">
-            <span>«</span>
+        <li>
+            <span class="inline-block px-2 py-1 text-cellar-border">«</span>
         </li>
     {% endif %}
     {% for i in page_obj.paginator.page_range %}
         {% if page_obj.number == i %}
-            <li class="active">
-                <span>{{ i }} <span class="visually-hidden">{% translate "(current)" %}</span></span>
+            <li>
+                <span class="inline-block px-2 py-1 text-cellar-purple-dark font-medium">{{ i }} <span class="sr-only">{% translate "(current)" %}</span></span>
             </li>
         {% else %}
             <li>
-                <a href="{% querystring page=i %}">{{ i }}</a>
+                <a href="{% querystring page=i %}"
+                   class="inline-block px-2 py-1 text-cellar-purple no-underline hover:text-cellar-purple-dark">{{ i }}</a>
             </li>
         {% endif %}
     {% endfor %}
     {% if page_obj.has_next %}
         <li>
-            <a href="{% querystring page=page_obj.next_page_number %}">»</a>
+            <a href="{% querystring page=page_obj.next_page_number %}"
+               class="inline-block px-2 py-1 text-cellar-purple no-underline hover:text-cellar-purple-dark">»</a>
         </li>
     {% else %}
-        <li class="disabled">
-            <span>»</span>
+        <li>
+            <span class="inline-block px-2 py-1 text-cellar-border">»</span>
         </li>
     {% endif %}
 </ul>
