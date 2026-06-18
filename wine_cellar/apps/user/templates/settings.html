@@ -10,25 +10,25 @@
 {% block header %}
 {% endblock header %}
 {% block content %}
-    <div class="pure-g settings-container">
+    <div class="flex flex-col lg:flex-row gap-5 mt-4">
         {% include "includes/settings_sidebar.html" %}
-        <div class="pure-u-1 pure-u-lg-3-4">
-            <div class="card">
-                <div class="card__header">
-                    <h3>{% translate "General" %}</h3>
+        <div class="flex-1">
+            <div class="bg-white rounded-xl shadow-card p-6">
+                <div class="flex justify-between items-center flex-wrap gap-2 mb-4 pb-3 border-b border-cellar-border-light">
+                    <h3 class="m-0 text-xl font-light text-cellar-muted">{% translate "General" %}</h3>
                 </div>
                 <form method="post"
                       enctype="multipart/form-data"
-                      class="form"
+                      class="tw-form"
                       novalidate>
                     {% csrf_token %}
-                    <div class="form__fields">
+                    <div class="grid grid-cols-1 gap-4">
                         {% include 'forms/form_field.html' with field=form.language %}
                         {% include 'forms/form_field.html' with field=form.currency %}
                         {% include 'forms/form_field.html' with field=form.notifications %}
                     </div>
-                    <div class="pure-controls">
-                        <button type="submit" name="continue" class="pure-button button__primary">{% translate "Save" %}</button>
+                    <div class="mt-6">
+                        <button type="submit" name="continue" class="btn btn-primary">{% translate "Save" %}</button>
                     </div>
                 </form>
             </div>

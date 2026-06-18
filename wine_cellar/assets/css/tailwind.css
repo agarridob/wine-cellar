@@ -18,6 +18,29 @@
         @apply bg-cellar-green-tint text-cellar-text hover:bg-[#dadfcf] focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[rgba(21,156,228,0.35)];
     }
 
+    /* Tables for Tailwind-migrated card/list screens. */
+    .tw-table {
+        @apply w-full border-collapse text-left min-w-[400px];
+    }
+    .tw-table th {
+        @apply text-xs text-cellar-muted uppercase tracking-wide font-medium px-3 py-2 border-b border-cellar-border-light;
+    }
+    .tw-table td {
+        @apply px-3 py-2 border-b border-[#f5f5f5];
+    }
+    .tw-table tbody tr:hover {
+        @apply bg-[#fafaf7];
+    }
+    .table-actions {
+        @apply text-right whitespace-nowrap;
+    }
+    .table-actions a {
+        @apply inline-flex items-center justify-center w-7 h-7 text-cellar-muted no-underline rounded transition-colors;
+    }
+    .table-actions a:hover {
+        @apply bg-cellar-green-tint text-cellar-text;
+    }
+
     /* Form controls for Tailwind-migrated forms. Inputs are rendered by
        Django ({{ field }}) so they are styled via descendant selectors
        under .tw-form rather than per-widget classes. */

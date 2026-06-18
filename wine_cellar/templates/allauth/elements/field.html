@@ -1,20 +1,20 @@
 {% load i18n allauth %}
-<div class="form-container">
+<div class="mb-4">
     <label for="{{ attrs.id }}">
         {% slot label %}{% endslot %}
         {% if not attrs.required %}
             {% if attrs.type != "checkbox" and attrs.type != "radio" %}
-                <p class="d-inline"
+                <p class="inline text-xs text-cellar-muted italic"
                    role="presentation"
                    title="{% translate "This field is optional" %}">{% translate "(Optional)" %}</p>
             {% endif %}
         {% endif %}
     </label>
     {% if attrs.help_text and attrs.type != "password" %}
-        <div class="form-hint">{% slot help_text %}{% endslot %}</div>
+        <div class="text-xs text-cellar-muted italic m-0 mb-1">{% slot help_text %}{% endslot %}</div>
     {% endif %}
     {% if attrs.errors %}
-        <ul class="form-errorlist" aria-live="assertive" aria-atomic="true">
+        <ul class="text-cellar-danger font-bold text-sm mt-1 pl-4" aria-live="assertive" aria-atomic="true">
             {% for error in attrs.errors %}<li>{{ error|escape }}</li>{% endfor %}
         </ul>
     {% endif %}
@@ -41,6 +41,6 @@
                type="{{ attrs.type }}">
     {% endif %}
      {% if attrs.help_text and attrs.type == "password" %}
-        <div class="form-hint">{% slot help_text %}{% endslot %}</div>
+        <div class="text-xs text-cellar-muted italic m-0 mb-1">{% slot help_text %}{% endslot %}</div>
     {% endif %}
 </div>

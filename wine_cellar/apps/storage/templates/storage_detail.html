@@ -1,54 +1,54 @@
 {% extends 'base.html' %}
 {% load static i18n %}
 {% block header %}
-    <h1 class="header__title">{{ storage.name }}</h1>
+    <h1 class="text-3xl font-light text-cellar-muted text-center mt-12 mb-9">{{ storage.name }}</h1>
 {% endblock header %}
 {% block content %}
-    <div class="card__container">
-        <div class="card">
-            <div class="card__header">
-                <h3>{% translate "Overview" %}</h3>
+    <div>
+        <div class="bg-white rounded-xl shadow-card p-6">
+            <div class="flex justify-between items-center flex-wrap gap-2 mb-4 pb-3 border-b border-cellar-border-light">
+                <h3 class="m-0 text-xl font-light text-cellar-muted">{% translate "Overview" %}</h3>
                 {% url 'storage-edit' storage.pk as edit_url %}
                 {% url 'storage-delete' storage.pk as delete_url %}
                 {% include "includes/edit_delete_buttons.html" with edit_url=edit_url delete_url=delete_url %}
             </div>
-            <div class="card__highlights">
-                <div class="card__highlight">
-                    <span class="card__highlight-value">{{ storage.used_slots }}</span>
-                    <span class="card__highlight-label">{% translate "Bottles" %}</span>
+            <div class="flex flex-wrap gap-4 mb-4">
+                <div class="flex flex-col items-center min-w-16">
+                    <span class="text-2xl font-normal text-cellar-text">{{ storage.used_slots }}</span>
+                    <span class="text-xs text-cellar-muted uppercase tracking-wide">{% translate "Bottles" %}</span>
                 </div>
                 {% if storage.total_slots > 0 %}
-                    <div class="card__highlight">
-                        <span class="card__highlight-value">{{ storage.used_slots }}/{{ storage.total_slots }}</span>
-                        <span class="card__highlight-label">{% translate "Capacity" %}</span>
+                    <div class="flex flex-col items-center min-w-16">
+                        <span class="text-2xl font-normal text-cellar-text">{{ storage.used_slots }}/{{ storage.total_slots }}</span>
+                        <span class="text-xs text-cellar-muted uppercase tracking-wide">{% translate "Capacity" %}</span>
                     </div>
                 {% endif %}
-                <div class="card__highlight">
-                    <span class="card__highlight-value">{{ storage.rows }}×{{ storage.columns }}</span>
-                    <span class="card__highlight-label">{% translate "Grid" %}</span>
+                <div class="flex flex-col items-center min-w-16">
+                    <span class="text-2xl font-normal text-cellar-text">{{ storage.rows }}×{{ storage.columns }}</span>
+                    <span class="text-xs text-cellar-muted uppercase tracking-wide">{% translate "Grid" %}</span>
                 </div>
             </div>
             {% if storage.location %}
-                <div class="card__field">
-                    <span class="card__field-label">{% translate "Location" %}</span>
-                    <span class="card__field-value">{{ storage.location }}</span>
+                <div class="flex flex-col mb-2">
+                    <span class="text-xs text-cellar-muted uppercase tracking-wide">{% translate "Location" %}</span>
+                    <span class="text-cellar-text">{{ storage.location }}</span>
                 </div>
                 {% if storage.description %}
-                    <div class="card__field">
-                        <span class="card__field-label">{% translate "Description" %}</span>
-                        <span class="card__field-value">{{ storage.description }}</span>
+                    <div class="flex flex-col mb-2">
+                        <span class="text-xs text-cellar-muted uppercase tracking-wide">{% translate "Description" %}</span>
+                        <span class="text-cellar-text">{{ storage.description }}</span>
                     </div>
                 {% endif %}
             {% endif %}
         </div>
 
-        <div class="card__section">
-            <div class="card">
-                <div class="card__header">
-                    <h3>{% translate "Contents" %}</h3>
+        <div class="mt-8">
+            <div class="bg-white rounded-xl shadow-card p-6">
+                <div class="flex justify-between items-center flex-wrap gap-2 mb-4 pb-3 border-b border-cellar-border-light">
+                    <h3 class="m-0 text-xl font-light text-cellar-muted">{% translate "Contents" %}</h3>
                 </div>
                 {% if object_list %}
-                    <table class="card__table"
+                    <table class="tw-table"
                            {% if storage.rows > 0 and storage.columns > 0 %}data-swap-url="{% url 'stock-swap' %}"{% endif %}
                            data-storage="{{ storage.pk }}">
                         <thead>
@@ -62,12 +62,12 @@
                         </thead>
                         {% for entry in object_list %}
                             {% if entry.is_empty %}
-                                <tr class="card__table-empty"
+                                <tr class="table-row-empty"
                                     data-row="{{ entry.row }}"
                                     data-column="{{ entry.column }}"
                                     draggable="false">
                                     {% if storage.rows > 0 and storage.columns > 0 %}<td></td>{% endif %}
-                                    <td><span class="text--gray">—</span></td>
+                                    <td><span class="text-cellar-muted">—</span></td>
                                     <td>{{ entry.row }}</td>
                                     <td>{{ entry.column }}</td>
                                     <td></td>
@@ -75,7 +75,7 @@
                             {% else %}
                                 <tr data-item-id="{{ entry.pk }}" draggable="{% if storage.rows > 0 and storage.columns > 0 %}true{% else %}false{% endif %}">
                                     {% if storage.rows > 0 and storage.columns > 0 %}
-                                    <td class="card__table-drag">
+                                    <td class="text-cellar-muted cursor-grab">
                                         <i class="fa-solid fa-grip-vertical"></i>
                                     </td>
                                     {% endif %}
@@ -84,7 +84,7 @@
                                     </td>
                                     <td>{{ entry.row|default_if_none:"—" }}</td>
                                     <td>{{ entry.column|default_if_none:"—" }}</td>
-                                    <td class="card__table-actions">
+                                    <td class="table-actions">
                                         <a href="{% url 'stock-edit' entry.pk %}?next=storage" title="{% translate "Edit" %}" aria-label="{% translate "Edit" %}"><i class="fa-regular fa-pen-to-square" aria-hidden="true"></i></a>
                                         {% if not entry.opened %}
                                             <a href="{% url 'stock-open' entry.pk %}?next=storage" title="{% translate "Open" %}" aria-label="{% translate "Open" %}"><i class="fa-solid fa-bottle-droplet" aria-hidden="true"></i></a>
@@ -97,7 +97,7 @@
                     </table>
                     {% include "includes/pagination.html" %}
                 {% else %}
-                    <p class="text--gray">{% translate "No wines here yet." %}</p>
+                    <p class="text-cellar-muted">{% translate "No wines here yet." %}</p>
                 {% endif %}
             </div>
         </div>

@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 {% load static i18n %}
 {% block header %}
-    <h1 class="header__title">{% translate "No wine found" %}</h1>
+    <h1 class="text-3xl font-light text-cellar-muted text-center mt-12 mb-9">{% translate "No wine found" %}</h1>
 {% endblock header %}
 {% block content %}
-    <div class="pure-g">
-        <div class="pure-u-1 pure-u-lg-1-2 m-auto">
-            <div class="card text-align-center">
+    <div>
+        <div class="max-w-xl mx-auto">
+            <div class="bg-white rounded-xl shadow-card p-6 text-center">
                 <p>
                     {% blocktranslate with code=barcode %}No wine with barcode <strong>{{ code }}</strong> found.{% endblocktranslate %}
                 </p>
-                <p class="text--gray">{% translate "Would you like to add a new wine with that barcode?" %}</p>
-                <div class="wine__add-buttons">
+                <p class="text-cellar-muted">{% translate "Would you like to add a new wine with that barcode?" %}</p>
+                <div class="flex flex-wrap gap-3 justify-center mt-5">
                     <a href="{% url 'wine-scan' %}"
-                       class="pure-button button__neutral"><i class="fa-solid fa-arrow-left"></i> <span>{% translate "Scan again" %}</span></a>
+                       class="btn btn-neutral"><i class="fa-solid fa-arrow-left"></i> <span>{% translate "Scan again" %}</span></a>
                     <a href="{% url 'wine-add-choose' %}?barcode={{ barcode }}"
-                       class="pure-button button__primary">{% translate "Add new wine" %}</a>
+                       class="btn btn-primary">{% translate "Add new wine" %}</a>
                 </div>
             </div>
         </div>
