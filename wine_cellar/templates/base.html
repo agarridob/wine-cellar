@@ -15,101 +15,78 @@
         {% endblock extra_js %}
         <title>
             {% block title %}
-                Django Wine Cellar
+                Wine Cellar
             {% endblock title %}
         </title>
     </head>
-    <body class="layout">
+    <body class="min-h-screen flex flex-col bg-cellar-bg font-sans text-cellar-text">
         {% block menu %}
             {% spaceless %}
-                <header>
-                    <!-- small screen menu -->
-                    <nav class="menu__sm">
-                        <!-- Menu toggle -->
-                        <input class="menu-toggle" type="checkbox" id="menu-toggle" value="text">
-                        <label class="menu-link" for="menu-toggle">
-                            {# djlint:off #}
-                            <span></span>
-                            {# djlint:on #}
-                        </label>
-                        <a href="{% url 'homepage' %}" class="pure-menu-heading pure-menu-link">Wine Cellar</a>
-                        <div class="pure-menu">
-                            <ul class="pure-menu-list">
+                <header class="bg-cellar-green text-white">
+
+                    {# ── Mobile nav ── #}
+                    <nav class="sm:hidden">
+                        <input type="checkbox" id="mobile-menu-toggle" class="hidden peer">
+                        <div class="flex items-center justify-between px-4 h-14">
+                            <a href="{% url 'homepage' %}" class="text-white no-underline font-light text-lg tracking-wide">Wine Cellar</a>
+                            <label for="mobile-menu-toggle"
+                                   class="text-white cursor-pointer p-2 text-2xl leading-none select-none"
+                                   aria-label="{% translate "Toggle menu" %}">
+                                &#9776;
+                            </label>
+                        </div>
+                        <div class="max-h-0 overflow-hidden peer-checked:max-h-96 transition-all duration-200 bg-cellar-green-dark absolute left-0 right-0 z-50 shadow-lg">
+                            <ul class="list-none m-0 py-2">
                                 {% if user.is_authenticated %}
-                                    <li class="pure-menu-item">
-                                        <a href="{% url 'wine-list' %}" class="pure-menu-link">{% translate "Wines" %}</a>
-                                    </li>
-                                    <li class="pure-menu-item">
-                                        <a href="{% url 'wine-add-choose' %}" class="pure-menu-link">{% translate "Add Wine" %}</a>
-                                    </li>
-                                    <li class="pure-menu-item">
-                                        <a href="{% url 'wine-scan' %}" class="pure-menu-link">{% translate "Scan Wine" %}</a>
-                                    </li>
-                                    <li class="pure-menu-item">
-                                        <a href="{% url 'wine-map' %}" class="pure-menu-link">{% translate "Map" %}</a>
-                                    </li>
-                                    <li class="pure-menu-item">
-                                        <a href="{% url 'storage-list' %}" class="pure-menu-link">{% translate "Storage" %}</a>
-                                    </li>
-                                    <li class="pure-menu-item">
-                                        <a href="{% url 'user-settings' %}" class="pure-menu-link">{% translate "Settings" %}</a>
-                                    </li>
-                                    <li class="pure-menu-item">
+                                    <li><a href="{% url 'wine-list' %}" class="block px-5 py-3 text-white/90 hover:text-white hover:bg-white/10 no-underline text-sm">{% translate "Wines" %}</a></li>
+                                    <li><a href="{% url 'wine-add-choose' %}" class="block px-5 py-3 text-white/90 hover:text-white hover:bg-white/10 no-underline text-sm">{% translate "Add Wine" %}</a></li>
+                                    <li><a href="{% url 'wine-scan' %}" class="block px-5 py-3 text-white/90 hover:text-white hover:bg-white/10 no-underline text-sm">{% translate "Scan Wine" %}</a></li>
+                                    <li><a href="{% url 'wine-map' %}" class="block px-5 py-3 text-white/90 hover:text-white hover:bg-white/10 no-underline text-sm">{% translate "Map" %}</a></li>
+                                    <li><a href="{% url 'storage-list' %}" class="block px-5 py-3 text-white/90 hover:text-white hover:bg-white/10 no-underline text-sm">{% translate "Storage" %}</a></li>
+                                    <li><a href="{% url 'user-settings' %}" class="block px-5 py-3 text-white/90 hover:text-white hover:bg-white/10 no-underline text-sm">{% translate "Settings" %}</a></li>
+                                    <li class="border-t border-white/10 mt-1 pt-1">
                                         <form action="{% url 'account_logout' %}" method="post">
                                             {% csrf_token %}
-                                            <button class="pure-menu-link button" type="submit">{% translate "Logout" %}</button>
+                                            <button type="submit" class="w-full text-left px-5 py-3 text-white/90 hover:text-white hover:bg-white/10 text-sm bg-transparent border-0 cursor-pointer">{% translate "Logout" %}</button>
                                         </form>
                                     </li>
                                 {% else %}
-                                    <li class="pure-menu-item">
-                                        <a href="{% url 'account_login' %}" class="pure-menu-link">{% translate "Login" %}</a>
-                                    </li>
+                                    <li><a href="{% url 'account_login' %}" class="block px-5 py-3 text-white/90 hover:text-white hover:bg-white/10 no-underline text-sm">{% translate "Login" %}</a></li>
                                 {% endif %}
                             </ul>
                         </div>
                     </nav>
-                    <!-- large screen menu -->
-                    <nav class="pure-menu pure-menu-horizontal menu__md">
-                        <div class="menu__container">
-                            <a href="{% url 'homepage' %}" class="pure-menu-heading pure-menu-link">Wine Cellar</a>
-                            <ul class="pure-menu-list">
+
+                    {# ── Desktop nav ── #}
+                    <nav class="max-sm:hidden">
+                        <div class="max-w-content mx-auto px-6 flex items-center justify-between h-14">
+                            <a href="{% url 'homepage' %}" class="text-white no-underline font-light text-lg tracking-wide shrink-0">Wine Cellar</a>
+                            <ul class="flex items-center gap-1 list-none m-0 p-0">
                                 {% if user.is_authenticated %}
-                                    <li class="pure-menu-item">
-                                        <a href="{% url 'wine-list' %}" class="pure-menu-link">{% translate "Wines" %}</a>
-                                    </li>
-                                    <li class="pure-menu-item">
-                                        <a href="{% url 'wine-add-choose' %}" class="pure-menu-link">{% translate "Add Wine" %}</a>
-                                    </li>
-                                    <li class="pure-menu-item">
-                                        <a href="{% url 'wine-scan' %}" class="pure-menu-link">{% translate "Scan Wine" %}</a>
-                                    </li>
-                                    <li class="pure-menu-item">
-                                        <a href="{% url 'wine-map' %}" class="pure-menu-link">{% translate "Map" %}</a>
-                                    </li>
-                                    <li class="pure-menu-item">
-                                        <a href="{% url 'storage-list' %}" class="pure-menu-link">{% translate "Storage" %}</a>
-                                    </li>
-                                    <li class="pure-menu-item">
-                                        <a href="{% url 'user-settings' %}" class="pure-menu-link">{% translate "Settings" %}</a>
-                                    </li>
-                                    <li class="pure-menu-item">
+                                    <li><a href="{% url 'wine-list' %}" class="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded text-sm no-underline transition-colors">{% translate "Wines" %}</a></li>
+                                    <li><a href="{% url 'wine-add-choose' %}" class="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded text-sm no-underline transition-colors">{% translate "Add Wine" %}</a></li>
+                                    <li><a href="{% url 'wine-scan' %}" class="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded text-sm no-underline transition-colors">{% translate "Scan Wine" %}</a></li>
+                                    <li><a href="{% url 'wine-map' %}" class="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded text-sm no-underline transition-colors">{% translate "Map" %}</a></li>
+                                    <li><a href="{% url 'storage-list' %}" class="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded text-sm no-underline transition-colors">{% translate "Storage" %}</a></li>
+                                    <li><a href="{% url 'user-settings' %}" class="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded text-sm no-underline transition-colors">{% translate "Settings" %}</a></li>
+                                    <li class="ml-2">
                                         <form action="{% url 'account_logout' %}" method="post">
                                             {% csrf_token %}
-                                            <button class="pure-menu-link button" type="submit">{% translate "Logout" %}</button>
+                                            <button type="submit" class="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded text-sm bg-transparent border-0 cursor-pointer transition-colors">{% translate "Logout" %}</button>
                                         </form>
                                     </li>
                                 {% else %}
-                                    <li class="pure-menu-item">
-                                        <a href="{% url 'account_login' %}" class="pure-menu-link">{% translate "Login" %}</a>
-                                    </li>
+                                    <li><a href="{% url 'account_login' %}" class="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded text-sm no-underline transition-colors">{% translate "Login" %}</a></li>
                                 {% endif %}
                             </ul>
                         </div>
                     </nav>
+
                 </header>
             {% endspaceless %}
         {% endblock menu %}
-        <main class="main">
+
+        <main class="flex-1 w-full max-w-content mx-auto px-4 sm:px-6 pb-16">
             {% block header %}
             {% endblock header %}
             {% block allauth_wrapper %}
@@ -117,10 +94,12 @@
                 {% endblock content %}
             {% endblock allauth_wrapper %}
         </main>
-        <footer class="footer">
-            <p>
+
+        <footer class="text-center text-xs text-cellar-muted py-4 border-t border-cellar-border-light">
+            <p class="m-0">
                 AGPL 3.0 | {% translate "Version" %} {% get_setting "VERSION" %} | <a href="https://github.com/the-broke-sommeliers/wine-cellar"
-    target="_blank">Github <span class="visually-hidden">(opens in new tab)</span></a>
+                   target="_blank"
+                   class="text-cellar-muted hover:text-cellar-text">Github <span class="sr-only">({% translate "opens in new tab" %})</span></a>
             </p>
         </footer>
     </body>

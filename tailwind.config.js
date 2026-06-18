@@ -13,19 +13,32 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        green: {
-          dark: '#408048',
-          darker: '#2e5f34',
-          darkest: '#07330d',
-        },
-        purple: {
-          dark: '#4d1445',
-          darker: '#2c0527',
-          darkest: '#23021f',
+        cellar: {
+          green: '#408048',
+          'green-dark': '#2e5f34',
+          'green-darkest': '#07330d',
+          'green-tint': 'rgba(64,128,72,0.08)',
+          purple: '#4d1445',
+          'purple-dark': '#2c0527',
+          bg: '#f6f5ef',
+          text: '#333333',
+          muted: '#525252',
+          border: '#d0d0d0',
+          'border-light': '#eeeeee',
+          danger: '#bb0000',
+          'danger-tint': '#fde8e8',
+          warning: '#d47500',
+          gold: '#d4a017',
         },
       },
       fontFamily: {
         sans: ['Helvetica', 'sans-serif'],
+      },
+      maxWidth: {
+        content: '1140px',
+      },
+      boxShadow: {
+        card: 'rgba(149,157,165,0.2) 0px 8px 24px',
       },
     },
   },
