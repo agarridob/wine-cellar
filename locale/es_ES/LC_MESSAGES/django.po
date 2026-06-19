@@ -1234,3 +1234,7 @@ msgstr "Cambiar contraseña"
 #: wine_cellar/templates/includes/settings_sidebar.html:19
 msgid "Social Accounts"
 msgstr "Cuentas sociales"
+
+#: wine_cellar/apps/wine/templates/wine_choose_action.html:14
+msgid "Scan the bottle barcode to look it up and add it."
+msgstr "Escanea el código de barras de la botella para buscarlo y añadirlo."
