@@ -21,3 +21,6 @@ wine_cellar/conf/local.py
 .tx/
 .playwright-mcp/
 CLAUDE.md
+
+# Caddy production TLS certs (Cloudflare Origin Certificates) - never commit
+caddy/*.pem
