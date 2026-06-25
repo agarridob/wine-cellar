@@ -1,4 +1,4 @@
-cellar.ha-hinojal.com {
+(app) {
 	tls {
 		dns cloudflare {env.CF_DNS_API_TOKEN}
 	}
@@ -15,4 +15,12 @@ cellar.ha-hinojal.com {
 		respond @health "Not Found" 404
 		reverse_proxy web:8000
 	}
+}
+
+cellar.ha-hinojal.com {
+	import app
+}
+
+bodega.hinojal.app {
+	import app
 }
