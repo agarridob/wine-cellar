@@ -29,12 +29,16 @@ services:
     env_file:
       - ./.env.prod.db
   caddy:
-    image: caddy:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.caddy
     restart: unless-stopped
     ports:
       - 80:80
       - 443:443
       - 443:443/udp
+    env_file:
+      - ./.env.prod
     volumes:
       - ./caddy:/etc/caddy/
       - static_volume:/srv/static
