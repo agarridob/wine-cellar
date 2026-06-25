@@ -38,15 +38,6 @@ bodega.hinojal.app {
 		reverse_proxy 192.168.30.158:32400
 	}
 
-	@unifi host unifi.hinojal.app
-	handle @unifi {
-		reverse_proxy https://192.168.0.1 {
-			transport http {
-				tls_insecure_skip_verify
-			}
-		}
-	}
-
 	@adguard host adguard.hinojal.app
 	handle @adguard {
 		reverse_proxy 192.168.0.184:80
