@@ -24,3 +24,74 @@ cellar.ha-hinojal.com {
 bodega.hinojal.app {
 	import app
 }
+
+# LAN-only reverse proxy for internal admin panels.
+# Reached only via AdGuard DNS rewrites (<name>.hinojal.app -> 192.168.0.62);
+# the public names (bodega/catas/dash) keep resolving to Cloudflare.
+*.hinojal.app {
+	tls {
+		dns cloudflare {env.CF_DNS_API_TOKEN}
+	}
+
+	@plex host plex.hinojal.app
+	handle @plex {
+		reverse_proxy 192.168.30.158:32400
+	}
+
+	@unifi host unifi.hinojal.app
+	handle @unifi {
+		reverse_proxy https://192.168.0.1 {
+			transport http {
+				tls_insecure_skip_verify
+			}
+		}
+	}
+
+	@adguard host adguard.hinojal.app
+	handle @adguard {
+		reverse_proxy 192.168.0.184:80
+	}
+
+	@proxmox host proxmox.hinojal.app
+	handle @proxmox {
+		reverse_proxy https://192.168.0.12:8006 {
+			transport http {
+				tls_insecure_skip_verify
+			}
+		}
+	}
+
+	@sonarr host sonarr.hinojal.app
+	handle @sonarr {
+		reverse_proxy 192.168.30.158:8989
+	}
+
+	@radarr host radarr.hinojal.app
+	handle @radarr {
+		reverse_proxy 192.168.30.158:7878
+	}
+
+	@prowlarr host prowlarr.hinojal.app
+	handle @prowlarr {
+		reverse_proxy 192.168.30.158:9696
+	}
+
+	@bazarr host bazarr.hinojal.app
+	handle @bazarr {
+		reverse_proxy 192.168.30.158:6767
+	}
+
+	@qbittorrent host qbittorrent.hinojal.app
+	handle @qbittorrent {
+		reverse_proxy 192.168.30.158:8080
+	}
+
+	@valetudo host valetudo.hinojal.app
+	handle @valetudo {
+		reverse_proxy 192.168.20.131:80
+	}
+
+	handle {
+		respond "Servicio no configurado" 404
+	}
+}
