@@ -1,5 +1,7 @@
 cellar.ha-hinojal.com {
-	tls /etc/caddy/cert.pem /etc/caddy/key.pem
+	tls {
+		dns cloudflare {env.CF_DNS_API_TOKEN}
+	}
 
 	@files {
 		path /static/* /media/*
