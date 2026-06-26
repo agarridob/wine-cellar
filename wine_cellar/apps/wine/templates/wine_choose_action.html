@@ -8,20 +8,20 @@
         <div class="max-w-3xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <a href="{% url 'wine-scan' %}"
-                   class="flex flex-col items-center text-center gap-3 p-8 px-6 rounded-xl bg-white shadow-card no-underline transition-shadow hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cellar-green">
-                    <span class="text-3xl text-cellar-green"><i class="fa-solid fa-barcode"></i></span>
+                   class="flex flex-col items-center text-center gap-3 p-8 px-6 rounded-xl bg-white shadow-card no-underline transition-shadow hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cellar-wine">
+                    <span class="text-3xl text-cellar-wine"><i class="fa-solid fa-barcode"></i></span>
                     <span class="text-xl font-normal text-cellar-text">{% translate "Scan Barcode" %}</span>
                     <span class="text-sm text-cellar-muted leading-snug">{% translate "Scan the bottle barcode to look it up and add it." %}</span>
                 </a>
                 <a href="{% url 'wine-ai-upload' %}?barcode={{ barcode }}"
-                   class="flex flex-col items-center text-center gap-3 p-8 px-6 rounded-xl bg-white shadow-card no-underline transition-shadow hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cellar-green{% if not ai_enabled %} opacity-50 pointer-events-none{% endif %}">
-                    <span class="text-3xl text-cellar-green"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                   class="flex flex-col items-center text-center gap-3 p-8 px-6 rounded-xl bg-white shadow-card no-underline transition-shadow hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cellar-wine{% if not ai_enabled %} opacity-50 pointer-events-none{% endif %}">
+                    <span class="text-3xl text-cellar-wine"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
                     <span class="text-xl font-normal text-cellar-text">{% translate "AI Upload" %}</span>
                     <span class="text-sm text-cellar-muted leading-snug">{% translate "Upload a photo of the bottle label and let AI fill in the details." %}</span>
                 </a>
                 <a href="{% url 'wine-add' %}?barcode={{ barcode }}"
-                   class="flex flex-col items-center text-center gap-3 p-8 px-6 rounded-xl bg-white shadow-card no-underline transition-shadow hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cellar-green">
-                    <span class="text-3xl text-cellar-green"><i class="fa-regular fa-keyboard"></i></span>
+                   class="flex flex-col items-center text-center gap-3 p-8 px-6 rounded-xl bg-white shadow-card no-underline transition-shadow hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cellar-wine">
+                    <span class="text-3xl text-cellar-wine"><i class="fa-regular fa-keyboard"></i></span>
                     <span class="text-xl font-normal text-cellar-text">{% translate "Add Manually" %}</span>
                     <span class="text-sm text-cellar-muted leading-snug">{% translate "Fill in all details yourself using the step-by-step form." %}</span>
                 </a>

@@ -19,37 +19,37 @@
             {% endblock title %}
         </title>
     </head>
-    <body class="min-h-screen flex flex-col bg-cellar-bg font-sans text-cellar-text">
+    <body class="min-h-screen flex flex-col bg-cellar-cream font-sans text-cellar-text">
         {% block menu %}
             {% spaceless %}
-                <header class="bg-cellar-green text-white">
+                <header class="bg-cellar-cream border-b border-cellar-wine/25">
 
                     {# ── Mobile nav ── #}
                     <nav class="sm:hidden">
                         <input type="checkbox" id="mobile-menu-toggle" class="hidden peer">
                         <div class="flex items-center justify-between px-4 h-14">
-                            <a href="{% url 'homepage' %}" class="text-white no-underline font-light text-lg tracking-wide">Wine Cellar</a>
+                            <a href="{% url 'homepage' %}" class="text-cellar-wine no-underline font-semibold text-lg tracking-wide">Wine Cellar</a>
                             <label for="mobile-menu-toggle"
-                                   class="text-white cursor-pointer p-2 text-2xl leading-none select-none"
+                                   class="text-cellar-wine cursor-pointer p-2 text-2xl leading-none select-none"
                                    aria-label="{% translate "Toggle menu" %}">
                                 &#9776;
                             </label>
                         </div>
-                        <div class="max-h-0 overflow-hidden peer-checked:max-h-96 transition-all duration-200 bg-cellar-green-dark absolute left-0 right-0 z-50 shadow-lg">
+                        <div class="max-h-0 overflow-hidden peer-checked:max-h-96 transition-all duration-200 bg-cellar-cream-card border-b border-cellar-border absolute left-0 right-0 z-50 shadow-lg">
                             <ul class="list-none m-0 py-2">
                                 {% if user.is_authenticated %}
-                                    <li><a href="{% url 'wine-list' %}" class="block px-5 py-3 text-white/90 hover:text-white hover:bg-white/10 no-underline text-sm">{% translate "Wines" %}</a></li>
-                                    <li><a href="{% url 'wine-map' %}" class="block px-5 py-3 text-white/90 hover:text-white hover:bg-white/10 no-underline text-sm">{% translate "Map" %}</a></li>
-                                    <li><a href="{% url 'storage-list' %}" class="block px-5 py-3 text-white/90 hover:text-white hover:bg-white/10 no-underline text-sm">{% translate "Storage" %}</a></li>
-                                    <li><a href="{% url 'user-settings' %}" class="block px-5 py-3 text-white/90 hover:text-white hover:bg-white/10 no-underline text-sm">{% translate "Settings" %}</a></li>
-                                    <li class="border-t border-white/10 mt-1 pt-1">
+                                    <li><a href="{% url 'wine-list' %}" class="block px-5 py-3 text-cellar-text hover:text-cellar-wine hover:bg-cellar-wine-tint no-underline text-sm">{% translate "Wines" %}</a></li>
+                                    <li><a href="{% url 'wine-map' %}" class="block px-5 py-3 text-cellar-text hover:text-cellar-wine hover:bg-cellar-wine-tint no-underline text-sm">{% translate "Map" %}</a></li>
+                                    <li><a href="{% url 'storage-list' %}" class="block px-5 py-3 text-cellar-text hover:text-cellar-wine hover:bg-cellar-wine-tint no-underline text-sm">{% translate "Storage" %}</a></li>
+                                    <li><a href="{% url 'user-settings' %}" class="block px-5 py-3 text-cellar-text hover:text-cellar-wine hover:bg-cellar-wine-tint no-underline text-sm">{% translate "Settings" %}</a></li>
+                                    <li class="border-t border-cellar-border mt-1 pt-1">
                                         <form action="{% url 'account_logout' %}" method="post">
                                             {% csrf_token %}
-                                            <button type="submit" class="w-full text-left px-5 py-3 text-white/90 hover:text-white hover:bg-white/10 text-sm bg-transparent border-0 cursor-pointer">{% translate "Logout" %}</button>
+                                            <button type="submit" class="w-full text-left px-5 py-3 text-cellar-text hover:text-cellar-wine hover:bg-cellar-wine-tint text-sm bg-transparent border-0 cursor-pointer">{% translate "Logout" %}</button>
                                         </form>
                                     </li>
                                 {% else %}
-                                    <li><a href="{% url 'account_login' %}" class="block px-5 py-3 text-white/90 hover:text-white hover:bg-white/10 no-underline text-sm">{% translate "Login" %}</a></li>
+                                    <li><a href="{% url 'account_login' %}" class="block px-5 py-3 text-cellar-text hover:text-cellar-wine hover:bg-cellar-wine-tint no-underline text-sm">{% translate "Login" %}</a></li>
                                 {% endif %}
                             </ul>
                         </div>
@@ -58,21 +58,21 @@
                     {# ── Desktop nav ── #}
                     <nav class="max-sm:hidden">
                         <div class="max-w-content mx-auto px-6 flex items-center justify-between h-14">
-                            <a href="{% url 'homepage' %}" class="text-white no-underline font-light text-lg tracking-wide shrink-0">Wine Cellar</a>
+                            <a href="{% url 'homepage' %}" class="text-cellar-wine no-underline font-semibold text-lg tracking-wide shrink-0">Wine Cellar</a>
                             <ul class="flex items-center gap-1 list-none m-0 p-0">
                                 {% if user.is_authenticated %}
-                                    <li><a href="{% url 'wine-list' %}" class="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded text-sm no-underline transition-colors">{% translate "Wines" %}</a></li>
-                                    <li><a href="{% url 'wine-map' %}" class="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded text-sm no-underline transition-colors">{% translate "Map" %}</a></li>
-                                    <li><a href="{% url 'storage-list' %}" class="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded text-sm no-underline transition-colors">{% translate "Storage" %}</a></li>
-                                    <li><a href="{% url 'user-settings' %}" class="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded text-sm no-underline transition-colors">{% translate "Settings" %}</a></li>
+                                    <li><a href="{% url 'wine-list' %}" class="px-3 py-2 text-cellar-text hover:text-cellar-wine hover:bg-cellar-wine-tint rounded text-sm no-underline transition-colors">{% translate "Wines" %}</a></li>
+                                    <li><a href="{% url 'wine-map' %}" class="px-3 py-2 text-cellar-text hover:text-cellar-wine hover:bg-cellar-wine-tint rounded text-sm no-underline transition-colors">{% translate "Map" %}</a></li>
+                                    <li><a href="{% url 'storage-list' %}" class="px-3 py-2 text-cellar-text hover:text-cellar-wine hover:bg-cellar-wine-tint rounded text-sm no-underline transition-colors">{% translate "Storage" %}</a></li>
+                                    <li><a href="{% url 'user-settings' %}" class="px-3 py-2 text-cellar-text hover:text-cellar-wine hover:bg-cellar-wine-tint rounded text-sm no-underline transition-colors">{% translate "Settings" %}</a></li>
                                     <li class="ml-2">
                                         <form action="{% url 'account_logout' %}" method="post">
                                             {% csrf_token %}
-                                            <button type="submit" class="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded text-sm bg-transparent border-0 cursor-pointer transition-colors">{% translate "Logout" %}</button>
+                                            <button type="submit" class="px-3 py-2 text-cellar-text hover:text-cellar-wine hover:bg-cellar-wine-tint rounded text-sm bg-transparent border-0 cursor-pointer transition-colors">{% translate "Logout" %}</button>
                                         </form>
                                     </li>
                                 {% else %}
-                                    <li><a href="{% url 'account_login' %}" class="px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded text-sm no-underline transition-colors">{% translate "Login" %}</a></li>
+                                    <li><a href="{% url 'account_login' %}" class="px-3 py-2 text-cellar-text hover:text-cellar-wine hover:bg-cellar-wine-tint rounded text-sm no-underline transition-colors">{% translate "Login" %}</a></li>
                                 {% endif %}
                             </ul>
                         </div>
