@@ -3,7 +3,7 @@
     {% if page_obj.has_previous %}
         <li>
             <a href="{% querystring page=page_obj.previous_page_number %}"
-               class="inline-block px-2 py-1 text-cellar-purple no-underline hover:text-cellar-purple-dark">«</a>
+               class="inline-block px-2 py-1 text-cellar-bronze no-underline hover:text-cellar-bronze-dark">«</a>
         </li>
     {% else %}
         <li>
@@ -13,19 +13,19 @@
     {% for i in page_obj.paginator.page_range %}
         {% if page_obj.number == i %}
             <li>
-                <span class="inline-block px-2 py-1 text-cellar-purple-dark font-medium">{{ i }} <span class="sr-only">{% translate "(current)" %}</span></span>
+                <span class="inline-block px-2 py-1 text-cellar-bronze-dark font-medium">{{ i }} <span class="sr-only">{% translate "(current)" %}</span></span>
             </li>
         {% else %}
             <li>
                 <a href="{% querystring page=i %}"
-                   class="inline-block px-2 py-1 text-cellar-purple no-underline hover:text-cellar-purple-dark">{{ i }}</a>
+                   class="inline-block px-2 py-1 text-cellar-bronze no-underline hover:text-cellar-bronze-dark">{{ i }}</a>
             </li>
         {% endif %}
     {% endfor %}
     {% if page_obj.has_next %}
         <li>
             <a href="{% querystring page=page_obj.next_page_number %}"
-               class="inline-block px-2 py-1 text-cellar-purple no-underline hover:text-cellar-purple-dark">»</a>
+               class="inline-block px-2 py-1 text-cellar-bronze no-underline hover:text-cellar-bronze-dark">»</a>
         </li>
     {% else %}
         <li>

@@ -6,6 +6,7 @@ module.exports = {
   entry: {
     base: {
       import: [
+        './wine_cellar/assets/css/fonts.css',
         './node_modules/tom-select/dist/css/tom-select.css',
         './node_modules/@fortawesome/fontawesome-free/css/fontawesome.css',
         './node_modules/@fortawesome/fontawesome-free/css/solid.css',

@@ -6,20 +6,20 @@
  */
 
 :root {
-  --darkest-green: #07330d;
-  --darker-green: #2e5f34;
-  --dark-green: #408048;
-  --dark-purple: #4d1445;
-  --darker-purple: #2c0527;
-  --darkest-purple: #23021f;
-  --gray-green: rgba(64, 128, 72, 0.21);
-  --red: #bb0000;
-  --danger-tint: #fde8e8;
-  --warning: #d47500;
-  --star-gold: #d4a017;
-  --light: #f6f5ef;
-  --text-color-gray: #525252;
-  --darker-gray: #333333;
+  --darkest-green: #3a0716;
+  --darker-green: #56091f;
+  --dark-green: #6e0f2a;
+  --dark-purple: #8a5a2a;
+  --darker-purple: #5a3a20;
+  --darkest-purple: #3a2418;
+  --gray-green: rgba(110, 15, 42, 0.21);
+  --red: #a02818;
+  --danger-tint: #f7e3df;
+  --warning: #c8762e;
+  --star-gold: #a8771a;
+  --light: #f5ecd5;
+  --text-color-gray: #6b5440;
+  --darker-gray: #2a1812;
   --font-xs: 0.8rem;
   --font-sm: 1rem;
   --font-md: 1.25rem;
@@ -27,12 +27,12 @@
   --font-xl: 2rem;
   --font-input: 0.8125rem;
   --border-radius: 10px;
-  --border-color: #d0d0d0;
-  --border-color-light: #eee;
-  --border-color-lighter: #f5f5f5;
+  --border-color: #ddc9a0;
+  --border-color-light: #efe3c2;
+  --border-color-lighter: #f5ecd5;
   --container-box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   --focus-ring-color: rgba(21, 156, 228, 0.35);
-  --green-tint: rgba(64, 128, 72, 0.08);
+  --green-tint: rgba(110, 15, 42, 0.08);
 }
 
 /* --- Barcode scanner (react_bar_code.tsx) --- */

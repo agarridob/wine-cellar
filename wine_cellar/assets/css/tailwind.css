@@ -20,7 +20,7 @@
         @apply mb-3;
     }
     a {
-        @apply text-cellar-green underline;
+        @apply text-cellar-wine underline;
     }
 }
 
@@ -31,13 +31,13 @@
         @apply inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-md text-sm font-normal no-underline cursor-pointer border-0 transition-colors;
     }
     .btn-primary {
-        @apply bg-cellar-green text-white hover:bg-cellar-green-dark active:bg-cellar-green-darkest focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[rgba(21,156,228,0.35)];
+        @apply bg-cellar-wine text-white hover:bg-cellar-wine-dark active:bg-cellar-wine-darkest focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[rgba(21,156,228,0.35)];
     }
     .btn-secondary {
-        @apply bg-cellar-purple text-white hover:bg-cellar-purple-dark focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[rgba(21,156,228,0.35)];
+        @apply bg-cellar-bronze text-white hover:bg-cellar-bronze-dark focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[rgba(21,156,228,0.35)];
     }
     .btn-neutral {
-        @apply bg-cellar-green-tint text-cellar-text hover:bg-[#dadfcf] focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[rgba(21,156,228,0.35)];
+        @apply bg-cellar-wine-tint text-cellar-text hover:bg-[#e6dcc0] focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[rgba(21,156,228,0.35)];
     }
 
     /* Tables for Tailwind-migrated card/list screens. */
@@ -60,7 +60,7 @@
         @apply inline-flex items-center justify-center w-7 h-7 text-cellar-muted no-underline rounded transition-colors;
     }
     .table-actions a:hover {
-        @apply bg-cellar-green-tint text-cellar-text;
+        @apply bg-cellar-wine-tint text-cellar-text;
     }
     /* Drag-and-drop for the storage detail table (stock_drag.ts). */
     .tw-table tr[draggable="true"] {
@@ -70,13 +70,13 @@
         @apply opacity-40;
     }
     .tw-table tr.drag-over {
-        @apply outline-dashed outline-2 -outline-offset-2 outline-cellar-green;
+        @apply outline-dashed outline-2 -outline-offset-2 outline-cellar-wine;
     }
     .table-row-empty td {
         @apply text-[#bbb] italic;
     }
     .table-row-empty.drag-over {
-        @apply bg-cellar-green-tint outline-dashed outline-2 -outline-offset-2 outline-cellar-green;
+        @apply bg-cellar-wine-tint outline-dashed outline-2 -outline-offset-2 outline-cellar-wine;
     }
 
     /* Form controls for Tailwind-migrated forms. Inputs are rendered by
@@ -92,16 +92,16 @@
     .tw-form select,
     .tw-form textarea {
         @apply w-full min-h-[36px] px-2 py-2 border border-cellar-border rounded-md text-sm bg-white box-border shadow-none;
-        @apply focus:outline-none focus:border-cellar-green focus:ring-2 focus:ring-[rgba(64,128,72,0.2)];
+        @apply focus:outline-none focus:border-cellar-wine focus:ring-2 focus:ring-[rgba(110,15,42,0.2)];
     }
     .tw-form input[type="file"] {
         @apply w-full min-h-[36px] p-1.5 border border-cellar-border rounded-md text-sm box-border bg-white;
     }
     .tw-form input[type="file"]::file-selector-button {
-        @apply px-3 py-1 mr-2 border-0 rounded bg-cellar-green-tint text-cellar-text text-xs cursor-pointer transition-colors;
+        @apply px-3 py-1 mr-2 border-0 rounded bg-cellar-wine-tint text-cellar-text text-xs cursor-pointer transition-colors;
     }
     .tw-form input[type="file"]::file-selector-button:hover {
-        @apply bg-cellar-green text-white;
+        @apply bg-cellar-wine text-white;
     }
     .tw-form input[aria-invalid="true"] {
         @apply border-cellar-danger;
@@ -114,6 +114,6 @@
         @apply min-h-[36px] border border-cellar-border rounded-md text-sm shadow-none;
     }
     .tw-form .ts-wrapper.focus .ts-control {
-        @apply border-cellar-green ring-2 ring-[rgba(64,128,72,0.2)];
+        @apply border-cellar-wine ring-2 ring-[rgba(110,15,42,0.2)];
     }
 }
