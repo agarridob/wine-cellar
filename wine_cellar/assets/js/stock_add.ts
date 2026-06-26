@@ -43,7 +43,7 @@ function updateStorageCells() {
     columnSelect.addEventListener('change', updateSubmit)
   }
 
-  function toggleFields(disable: boolean, submit: boolean = false) {
+  function toggleFields(disable: boolean) {
     rowSelect.disabled = disable
     columnSelect.disabled = disable
     if (disable) {
@@ -53,7 +53,8 @@ function updateStorageCells() {
       rowSelect.tomselect?.enable()
       columnSelect.tomselect?.enable()
     }
-    submitButton.disabled = !submit
+    // Row/column are optional, so saving is always allowed.
+    submitButton.disabled = false
   }
 
   function populateSelect(select: HTMLSelectElement, options: number[]) {
@@ -64,16 +65,26 @@ function updateStorageCells() {
       opt.textContent = String(val)
       select.appendChild(opt)
     })
-    select.tomselect?.clear(true)
-    select.tomselect?.clearOptions()
-    options.forEach((val) => {
-      select.tomselect?.addOption({ value: val, text: val })
-    })
-    select.tomselect?.refreshOptions(false)
+    const ts = select.tomselect
+    if (ts) {
+      // Blank option = no specific slot (row/column are optional).
+      ts.clear(true)
+      ts.clearOptions()
+      ts.addOption({ value: '', text: '—' })
+      options.forEach((val) => ts.addOption({ value: val, text: val }))
+      ts.refreshOptions(false)
+      ts.setValue('', true)
+    } else {
+      const blank = document.createElement('option')
+      blank.value = ''
+      blank.textContent = '—'
+      select.insertBefore(blank, select.firstChild)
+      select.value = ''
+    }
   }
 
   function updateSubmit() {
-    submitButton.disabled = columnSelect.value === ''
+    submitButton.disabled = false
   }
 
   function updateColumns() {
@@ -94,7 +105,7 @@ function updateStorageCells() {
       showWarning()
       populateSelect(columnSelect, [])
     }
-    toggleFields(false, false)
+    toggleFields(false)
   }
 
   function updateRows() {
@@ -108,11 +119,11 @@ function updateStorageCells() {
       const rowKeys = Object.keys(rows).map(Number)
       populateSelect(rowSelect, rowKeys)
       populateSelect(columnSelect, [])
-      toggleFields(false, false)
+      toggleFields(false)
     } else {
       populateSelect(rowSelect, [])
       populateSelect(columnSelect, [])
-      toggleFields(true, true)
+      toggleFields(true)
     }
   }
 }
