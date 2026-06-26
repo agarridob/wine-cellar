@@ -113,30 +113,23 @@ class StockForm(forms.Form):
         row = cleaned_data.get("row")
         column = cleaned_data.get("column")
         storage = cleaned_data.get("storage")
-        if storage:
-            if storage.rows > 0 and storage.columns > 0:
-                if not row or not column:
-                    raise forms.ValidationError(
-                        _(
-                            "Both row and column must be specified for the selected"
-                            " storage."
-                        ),
-                        code="row_column_required",
-                    )
-                if storage.is_slot_occupied(row, column) and not (
-                    self.storage_item
-                    and self.storage_item.row == row
-                    and self.storage_item.column == column
-                    and self.storage_item.storage == storage
-                ):
-                    raise forms.ValidationError(
-                        _(
-                            "The selected slot (row: %(row)s, column: %(column)s)"
-                            " is already occupied in the storage."
-                        ),
-                        code="slot_occupied",
-                        params={"row": row, "column": column},
-                    )
+        # Row and column are optional. Only validate the slot when both are
+        # given (a bottle may live in a storage without an assigned position).
+        if storage and storage.rows > 0 and storage.columns > 0 and row and column:
+            if storage.is_slot_occupied(row, column) and not (
+                self.storage_item
+                and self.storage_item.row == row
+                and self.storage_item.column == column
+                and self.storage_item.storage == storage
+            ):
+                raise forms.ValidationError(
+                    _(
+                        "The selected slot (row: %(row)s, column: %(column)s)"
+                        " is already occupied in the storage."
+                    ),
+                    code="slot_occupied",
+                    params={"row": row, "column": column},
+                )
         return cleaned_data
 
 
