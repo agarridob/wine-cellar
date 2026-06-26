@@ -131,7 +131,7 @@ msgstr ""
 #: wine_cellar/apps/storage/templates/stock_add.html:9
 #: wine_cellar/apps/storage/templates/stock_add.html:12
 msgid "Add Bottle"
-msgstr "Añadir botella"
+msgstr "Añadir a la bodega"
 
 #: wine_cellar/apps/storage/templates/stock_add.html:36
 msgid "This row of the shelf is full. Please choose another one."
