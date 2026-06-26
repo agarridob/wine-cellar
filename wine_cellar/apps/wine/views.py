@@ -34,6 +34,7 @@ from wine_cellar.apps.wine.models import (
     WineType,
 )
 from wine_cellar.apps.wine.serializers import WineAiSerializer
+from wine_cellar.apps.wine.tasks import download_bodeboca_image
 
 
 class HomePageView(TemplateView):
@@ -177,6 +178,9 @@ class WineBaseView(OpenChoiceModelFormViewMixin, FormView):
         if bodeboca_url:
             wine.external_bottle_image = bodeboca_url
             wine.save()
+            # Save a local copy of the bottle image (Celery); falls back to the
+            # external URL if the download fails.
+            download_bodeboca_image.delay(wine.id, bodeboca_url, user.id)
 
         return wine
 
